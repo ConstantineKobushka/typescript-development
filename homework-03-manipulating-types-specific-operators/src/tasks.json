@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "title": "Task 1",
+    "description": "Description for task 1",
+    "createdAt": "2025-09-18",
+    "status": "done",
+    "priority": "low",
+    "deadline": "2025-10-02"
+  },
+  {
+    "id": 2,
+    "title": "Task 2",
+    "description": "Description for task 2",
+    "createdAt": "2025-09-05",
+    "status": "in_progress",
+    "priority": "medium",
+    "deadline": "2025-10-03"
+  },
+  {
+    "id": 3,
+    "title": "Task 3",
+    "description": "Description for task 3",
+    "createdAt": "2025-09-12",
+    "status": "done",
+    "priority": "high",
+    "deadline": "2025-10-01"
+  },
+  {
+    "id": 4,
+    "title": "Task 4",
+    "description": "Description for task 4",
+    "createdAt": "2025-09-15",
+    "status": "done",
+    "priority": "low",
+    "deadline": "2025-10-02"
+  },
+  {
+    "id": 5,
+    "title": "Task 5",
+    "description": "Description for task 5",
+    "createdAt": "2025-09-20",
+    "status": "todo",
+    "priority": "high",
+    "deadline": "2025-10-04"
+  },
+  {
+    "id": 6,
+    "title": "Task 6",
+    "description": "Description for task 6",
+    "createdAt": "2025-09-25",
+    "status": "in_progress",
+    "priority": "medium",
+    "deadline": "2025-10-15"
+  },
+  {
+    "id": 7,
+    "title": "Task 7",
+    "description": "Description for task 7",
+    "createdAt": "2025-09-28",
+    "status": "done",
+    "priority": "low",
+    "deadline": "2025-10-19"
+  },
+  {
+    "id": 8,
+    "title": "Task 8",
+    "description": "Description for task 8",
+    "createdAt": "2025-09-26",
+    "status": "todo",
+    "priority": "high",
+    "deadline": "2025-10-20"
+  },
+  {
+    "id": 9,
+    "title": "Task 9",
+    "description": "Description for task 9",
+    "createdAt": "2025-09-30",
+    "status": "in_progress",
+    "priority": "medium",
+    "deadline": "2025-10-13"
+  },
+  {
+    "id": 10,
+    "title": "Task 10",
+    "description": "Description for task 10",
+    "createdAt": "2025-10-03",
+    "status": "todo",
+    "priority": "high",
+    "deadline": "2025-10-17"
+  }
+]
