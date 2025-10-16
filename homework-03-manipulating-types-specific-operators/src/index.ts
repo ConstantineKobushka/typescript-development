@@ -7,18 +7,31 @@ import {
   filterTasks,
   isTaskCompletedOnTime,
 } from './utils/taskUtils';
-
 import tasksData from './tasks.json';
+import { taskSchema } from './validation/taskSchema';
 
-const tasks: Task[] = tasksData as Task[];
+const validatedTasks: Task[] = [];
+
+for (const [index, item] of tasksData.entries()) {
+  const { error, value } = taskSchema.validate(item, { abortEarly: false });
+
+  if (error) {
+    console.error(`❌ Помилка валідації у завданні №${index + 1}:`);
+    console.error(error.details.map(d => d.message).join('\n'));
+  } else {
+    validatedTasks.push(value as Task);
+  }
+}
+
+const tasks = validatedTasks;
 
 // Отримання завдання за ID
 console.log('----------- Task by ID 1: -----------');
-console.log(getTaskById(tasks, 1));
+console.log(getTaskById(tasks, '1'));
 
 // Створення нового завдання
 const newTask: Task = {
-  id: 11,
+  id: '11',
   title: 'New Task',
   description: 'This is a new task',
   createdAt: '2025-10-06',
@@ -32,7 +45,7 @@ console.log(createTask(tasks, newTask));
 
 // Оновлення існуючого завдання
 const updatedTask: Task = {
-  id: 11,
+  id: '11',
   title: 'Updated Task',
   description: 'This task was updated',
   createdAt: '2025-10-06',
@@ -46,7 +59,7 @@ console.log(updateTask(tasks, updatedTask));
 
 // Видалення завдання за ID
 console.log('----------- Tasks after deletion last task: -----------');
-console.log(deleteTask(tasks, 11));
+console.log(deleteTask(tasks, '11'));
 
 // Фільтрація завдань за статусом, пріоритетом та датою створення
 console.log('----------- tasks with priority "high": -----------');
@@ -58,15 +71,15 @@ console.log(filterTasks(tasks, undefined, undefined, '2025-09-15'));
 
 // Перевірка, чи завдання виконане вчасно
 console.log('----------- Is task completed on time? -----------');
-console.log(isTaskCompletedOnTime(tasks, 1));
-console.log(isTaskCompletedOnTime(tasks, 2));
-console.log(isTaskCompletedOnTime(tasks, 3));
-console.log(isTaskCompletedOnTime(tasks, 4));
-console.log(isTaskCompletedOnTime(tasks, 5));
-console.log(isTaskCompletedOnTime(tasks, 6));
-console.log(isTaskCompletedOnTime(tasks, 7));
-console.log(isTaskCompletedOnTime(tasks, 8));
-console.log(isTaskCompletedOnTime(tasks, 9));
-console.log(isTaskCompletedOnTime(tasks, 10));
-console.log(isTaskCompletedOnTime(tasks, 11));
-console.log(isTaskCompletedOnTime(tasks, 12));
+console.log(isTaskCompletedOnTime(tasks, '1'));
+console.log(isTaskCompletedOnTime(tasks, '2'));
+console.log(isTaskCompletedOnTime(tasks, '3'));
+console.log(isTaskCompletedOnTime(tasks, '4'));
+console.log(isTaskCompletedOnTime(tasks, '5'));
+console.log(isTaskCompletedOnTime(tasks, '6'));
+console.log(isTaskCompletedOnTime(tasks, '7'));
+console.log(isTaskCompletedOnTime(tasks, '8'));
+console.log(isTaskCompletedOnTime(tasks, '9'));
+console.log(isTaskCompletedOnTime(tasks, '10'));
+console.log(isTaskCompletedOnTime(tasks, '11'));
+console.log(isTaskCompletedOnTime(tasks, '12'));

@@ -11,10 +11,7 @@ export function setDefaults(task: Task): Task {
   return task;
 }
 
-export function findTaskById(
-  tasks: Task[],
-  id: string | number
-): Task | undefined {
+export function findTaskById(tasks: Task[], id: string): Task | undefined {
   const task = tasks.find(task => task.id === id);
   if (!task) {
     console.error(`Task with id ${id} not found`);
@@ -22,10 +19,7 @@ export function findTaskById(
   return task;
 }
 
-export function getTaskById(
-  tasks: Task[],
-  id: string | number
-): Task | undefined {
+export function getTaskById(tasks: Task[], id: string): Task | undefined {
   return findTaskById(tasks, id);
 }
 
@@ -43,7 +37,7 @@ export function updateTask(tasks: Task[], updatedTask: Task): Task[] {
   return tasks;
 }
 
-export function deleteTask(tasks: Task[], id: string | number): Task[] {
+export function deleteTask(tasks: Task[], id: string): Task[] {
   return tasks.filter(task => task.id !== id);
 }
 
@@ -69,33 +63,20 @@ export function filterTasks(
 
 export function isTaskCompletedOnTime(
   tasks: Task[],
-  id: string | number
+  id: string
 ): boolean | undefined {
   const task = findTaskById(tasks, id);
 
   if (task) {
     console.log('Found task:', task);
-  }
 
-  if (task && task.status === 'done') {
     const taskCreatedAt = new Date(task.createdAt).getTime();
     const taskDeadline = new Date(task.deadline).getTime();
 
-    return taskCreatedAt <= taskDeadline;
-  }
-
-  if (task && task.status !== 'done') {
-    const taskCreatedAt = new Date(task.createdAt).getTime();
-    const taskDeadline = new Date(task.deadline).getTime();
-    const currentDate = new Date().getTime();
-
-    if (currentDate > taskDeadline) {
-      return false;
-    }
-
-    if (taskCreatedAt <= taskDeadline && currentDate < taskDeadline) {
-      console.log(`Завдання маэ статус ${task.status}`);
-      return;
+    if (task && task.status === 'done') {
+      return taskCreatedAt <= taskDeadline;
+    } else {
+      return taskCreatedAt <= taskDeadline;
     }
   }
 }

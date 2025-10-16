@@ -3,7 +3,7 @@ export type Status = 'todo' | 'in_progress' | 'done';
 export type Priority = 'low' | 'medium' | 'high';
 
 export type Task = {
-  id: string | number;
+  id: string;
   title: string;
   description: string;
   createdAt: string | Date;
