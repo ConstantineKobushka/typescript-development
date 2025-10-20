@@ -19,7 +19,7 @@ export class TaskService {
   }
 
   findById(id: string): Task | undefined {
-    const task = this.tasks.find((task) => task.id === id);
+    const task = this.tasks.find(task => task.id === id);
     if (!task) {
       console.error(`Task with id ${id} not found`);
     }
@@ -31,7 +31,7 @@ export class TaskService {
   }
 
   create(newTask: Task): Task {
-    if (this.tasks.some((task) => task.id === newTask.id)) {
+    if (this.tasks.some(task => task.id === newTask.id)) {
       throw new Error(`Task with id ${newTask.id} already exists`);
     }
     this.tasks.push(this.setDefaults(newTask));
@@ -42,7 +42,7 @@ export class TaskService {
     const task = this.findById(updatedTask.id);
     if (task) {
       const taskIndex = this.tasks.findIndex(
-        (task) => task.id === updatedTask.id
+        task => task.id === updatedTask.id
       );
       this.tasks[taskIndex] = this.setDefaults(updatedTask);
     }
@@ -50,29 +50,15 @@ export class TaskService {
   }
 
   delete(id: string): void {
-    this.tasks = this.tasks.filter((task) => task.id !== id);
+    this.tasks = this.tasks.filter(task => task.id !== id);
   }
-
-  // filter(status?: Status, priority?: Priority, createdAt?: Date): Task[] {
-  //   return this.tasks.filter((task) => {
-  //     const sameDate = createdAt
-  //       ? new Date(task.createdAt).setHours(0, 0, 0, 0) ===
-  //         new Date(createdAt).setHours(0, 0, 0, 0)
-  //       : true;
-  //     return (
-  //       (!status || task.status === status) &&
-  //       (!priority || task.priority === priority) &&
-  //       sameDate
-  //     );
-  //   });
-  // }
 
   filter(
     status?: Status,
     priority?: Priority,
     createdAt?: string | Date
   ): Task[] {
-    return this.tasks.filter((task) => {
+    return this.tasks.filter(task => {
       const taskCreatedAt = new Date(task.createdAt).setHours(0, 0, 0, 0);
       const filterDate = createdAt
         ? new Date(createdAt).setHours(0, 0, 0, 0)
@@ -88,18 +74,12 @@ export class TaskService {
 
   isTaskCompletedOnTime(id: string): boolean | undefined {
     const task = this.findById(id);
+    if (!task) return;
 
-    if (task) {
-      console.log('Found task:', task);
+    if (task.status !== 'done') return false;
 
-      const taskCreatedAt = new Date(task.createdAt).getTime();
-      const taskDeadline = new Date(task.deadline).getTime();
-
-      if (task && task.status === 'done') {
-        return taskCreatedAt <= taskDeadline;
-      } else {
-        return taskCreatedAt <= taskDeadline;
-      }
-    }
+    const deadline = new Date(task.deadline).getTime();
+    const completedAt = new Date(task.createdAt).getTime();
+    return completedAt <= deadline;
   }
 }

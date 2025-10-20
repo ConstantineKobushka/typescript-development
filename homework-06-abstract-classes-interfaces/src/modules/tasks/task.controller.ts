@@ -19,9 +19,13 @@ export class TaskController {
   }
 
   createBug(data: any): void {
-    const bug = new Bug(data);
-    this.service.create(bug);
-    console.log('Bug created:', bug.getTaskInfo());
+    try {
+      const bug = new Bug(data);
+      this.service.create(bug);
+      console.log('Bug created:', bug.getTaskInfo());
+    } catch (error) {
+      console.error('Error creating bug:', (error as Error).message);
+    }
   }
 
   getAllTasks(): void {

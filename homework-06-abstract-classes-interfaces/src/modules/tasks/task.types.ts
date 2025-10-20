@@ -1,5 +1,7 @@
-export type Status = 'todo' | 'in_progress' | 'done';
-export type Priority = 'low' | 'medium' | 'high';
+import { STATUSES, PRIORITIES } from '../../constants';
+
+export type Status = (typeof STATUSES)[number];
+export type Priority = (typeof PRIORITIES)[number];
 
 export class Task {
   id: string;
