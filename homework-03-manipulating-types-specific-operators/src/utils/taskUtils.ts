@@ -76,7 +76,7 @@ export function isTaskCompletedOnTime(
     if (task && task.status === 'done') {
       return taskCreatedAt <= taskDeadline;
     } else {
-      return taskCreatedAt <= taskDeadline;
+      return taskCreatedAt >= taskDeadline;
     }
   }
 }
