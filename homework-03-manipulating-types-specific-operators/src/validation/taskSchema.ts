@@ -1,3 +1,4 @@
+// validation/taskSchema.ts
 import Joi from 'joi';
 import { STATUSES, PRIORITIES } from '../constants';
 
@@ -18,3 +19,5 @@ export const taskSchema = Joi.object({
     .pattern(/^\d{4}-\d{2}-\d{2}$/)
     .required(),
 });
+
+export const tasksArraySchema = Joi.array().items(taskSchema);

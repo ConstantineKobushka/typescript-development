@@ -8,22 +8,21 @@ import {
   isTaskCompletedOnTime,
 } from './utils/taskUtils';
 import tasksData from './tasks.json';
-import { taskSchema } from './validation/taskSchema';
+import { tasksArraySchema } from './validation/taskSchema';
 
-const validatedTasks: Task[] = [];
+const { error, value } = tasksArraySchema.validate(tasksData, {
+  abortEarly: false,
+});
 
-for (const [index, item] of tasksData.entries()) {
-  const { error, value } = taskSchema.validate(item, { abortEarly: false });
-
-  if (error) {
-    console.error(`❌ Помилка валідації у завданні №${index + 1}:`);
-    console.error(error.details.map(d => d.message).join('\n'));
-  } else {
-    validatedTasks.push(value as Task);
-  }
+if (error) {
+  console.error('❌ Помилки валідації масиву завдань:');
+  error.details.forEach(err => {
+    console.error(`— ${err.message}`);
+  });
+  throw new Error('Валідація не пройдена');
 }
 
-const tasks = validatedTasks;
+const tasks: Task[] = value;
 
 // Отримання завдання за ID
 console.log('----------- Task by ID 1: -----------');
